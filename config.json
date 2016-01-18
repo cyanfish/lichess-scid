@@ -1,6 +1,5 @@
 {
-	user: "",
-	database: "lichess.si4",
-	temp: "temp.pgn",
-	timestamp: 0
+    "timestamp": 0,
+    "user": "YOUR USERNAME",
+    "database": "lichess"
 }
