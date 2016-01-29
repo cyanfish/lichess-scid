@@ -1,9 +1,11 @@
 lichess-scid Copyright 2016 Ben Olden-Cooligan
 https://github.com/cyanfish/lichess-scid
 
+Licensed under the GNU GPL v2 (see the COPYING file for details)
+
 Requirements:
 Python 3.x (https://www.python.org/downloads/)
-If your Python is installed somewhere other than "C:\Python35", edit "lichess-scid.bat" to change the path.
+If your Python is not in your path, edit "lichess-scid.bat" to point to it directly.
 
 To start, edit the "config.json" file and put in your lichess username where indicated. You can also change the database name if you want.
 Then whenever you want to update the database, run "lichess-scid.bat".
