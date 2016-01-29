@@ -12,11 +12,11 @@ def SaveConfig(filename, config):
         json.dump(config, file, indent=4)
 
 def UrlJson(url):
-    print("Req: " + url)
+    # print("Req: " + url)
     return requests.get(url).json()
 
 def UrlString(url):
-    print("Req: " + url)
+    # print("Req: " + url)
     return requests.get(url).text
 
 def DownloadPgn(user, filename, timestamp):
@@ -31,16 +31,18 @@ def DownloadPgn(user, filename, timestamp):
     with open(filename, "wb") as file:
         for g in games:
             if g["timestamp"] > timestamp:
-                pgn = UrlString("http://en.lichess.org/game/export/%s.pgn" % g["id"])
-                print("Save: " + filename + " " + g["id"])
+                url = "http://en.lichess.org/game/export/%s.pgn" % g["id"]
+                print("Downloading: " + url)
+                pgn = UrlString(url)
+                # print("Save: " + filename + " " + g["id"])
                 file.write((pgn + "\n\n").encode("utf-8"))
             if g["timestamp"] > newTimestamp:
                 newTimestamp = g["timestamp"]
     return newTimestamp
 
 def ImportPgn(pgnFilename, scidFilename):
-    print("Import: " + pgnFilename + " " + scidFilename)
-    os.system("pgnscid %s %s" % (pgnFilename, "temp"))
+    print("Saving to database: " + scidFilename)
+    os.system("pgnscid -f %s %s" % (pgnFilename, "temp"))
     try:
         os.remove(scidFilename + ".old.si4")
         os.remove(scidFilename + ".old.sg4")
