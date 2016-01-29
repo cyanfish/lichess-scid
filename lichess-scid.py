@@ -19,11 +19,12 @@ def UrlString(url):
     # print("Req: " + url)
     return requests.get(url).text
 
-def DownloadPgn(user, filename, timestamp):
+def DownloadPgn(user, filename, timestamp, maxGames):
     page = 1
     nb = 100
-    while True:
-        games = UrlJson("http://en.lichess.org/api/user/%s/games?page=%d&nb=%d" % (user, page, nb))["currentPageResults"]
+    games = []
+    while (page - 1) * nb < maxGames:
+        games += UrlJson("http://en.lichess.org/api/user/%s/games?page=%d&nb=%d" % (user, page, nb))["currentPageResults"]
         if len(games) != nb or any((g["timestamp"] < timestamp for g in games)):
             break
         page += 1
@@ -65,7 +66,7 @@ def ImportPgn(pgnFilename, scidFilename):
 
 if __name__ == "__main__":
     config = LoadConfig("config.json")
-    config["timestamp"] = DownloadPgn(config["user"], "temp.pgn", config["timestamp"])
+    config["timestamp"] = DownloadPgn(config["user"], "temp.pgn", config["timestamp"], config["maxGames"])
     ImportPgn("temp.pgn", config["database"])
     SaveConfig("config.json", config)
     os.remove("temp.pgn")

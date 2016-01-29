@@ -1,5 +1,6 @@
 {
     "timestamp": 0,
+	"maxGames": 1000,
     "user": "YOUR USERNAME",
     "database": "lichess"
 }
