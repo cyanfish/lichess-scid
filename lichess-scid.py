@@ -20,12 +20,13 @@ def UrlString(url):
     return requests.get(url).text
 
 def DownloadPgn(user, filename, timestamp):
-    nb = 10
+    page = 1
+    nb = 100
     while True:
-        games = UrlJson("http://en.lichess.org/api/game?username=%s&nb=%d" % (user, nb))["list"]
+        games = UrlJson("http://en.lichess.org/api/user/%s/games?page=%d&nb=%d" % (user, page, nb))["currentPageResults"]
         if len(games) != nb or any((g["timestamp"] < timestamp for g in games)):
             break
-        nb *= 2
+        page += 1
     newTimestamp = timestamp
     with open(filename, "wb") as file:
         for g in games:
