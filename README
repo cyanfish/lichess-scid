@@ -6,7 +6,7 @@ Python 3.x (https://www.python.org/downloads/)
 If your Python is installed somewhere other than "C:\Python35", edit "lichess-scid.bat" to change the path.
 
 To start, edit the "config.json" file and put in your lichess username where indicated. You can also change the database name if you want.
-Then whenever you want to update the database, run "lichess-scid.py" (or "lichess-scid.bat" if on Windows).
+Then whenever you want to update the database, run "lichess-scid.bat".
 Up to 1000 of your latest games will be downloaded (edit "config.json" if you want more).
 
 Using a separate database from your usual Scid database is recommended to avoid possible data loss.
