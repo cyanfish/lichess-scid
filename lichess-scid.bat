@@ -1,1 +1,1 @@
-C:\Python35\python lichess-scid.py
+python lichess-scid.py
